@@ -18,7 +18,7 @@ def dist2(dFrame, centr, index):
 
 def distAll(dFrame, centr, index):
     S=0
-    for j in range(12):
+    for j in range(13):
         S+= (dFrame[dFrame.columns[j]]-centr[index][j])**2
     ret=np.sqrt(S)
     return ret
@@ -33,7 +33,9 @@ def assignment2(dFrame, centr):
     centroid_distance_cols = ['distance_from_{}'.format(i) for i in centr.keys()]
     dFrame['closest'] = dFrame.loc[:, centroid_distance_cols].idxmin(axis=1)
     dFrame['closest'] = dFrame['closest'].map(lambda x: int(x.lstrip('distance_from_')))
-
+    colmap = {1: 'r', 2: 'g', 3: 'b'}
+    dFrame['color'] = dFrame['closest'].map(lambda x: colmap[x])
+    
     return dFrame
 
 def assignmentAll(dFrame, centr):
@@ -42,7 +44,9 @@ def assignmentAll(dFrame, centr):
     centroid_distance_cols = ['distance_from_{}'.format(i) for i in centr.keys()]
     dFrame['closest'] = dFrame.loc[:, centroid_distance_cols].idxmin(axis=1)
     dFrame['closest'] = dFrame['closest'].map(lambda x: int(x.lstrip('distance_from_')))
-
+    colmap = {1: 'r', 2: 'g', 3: 'b'}
+    dFrame['color'] = dFrame['closest'].map(lambda x: colmap[x])
+    
     return dFrame
 
 
